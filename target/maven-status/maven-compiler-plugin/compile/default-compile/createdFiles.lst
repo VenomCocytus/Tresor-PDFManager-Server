@@ -1,5 +1,6 @@
 com/venomclasses/tresorseen/TresorSeenApplication.class
 com/venomclasses/tresorseen/entity/FileDB.class
+com/venomclasses/tresorseen/filter/SimpleCORSFilter.class
 com/venomclasses/tresorseen/response/ResponseFile.class
 com/venomclasses/tresorseen/util/FileUtils.class
 com/venomclasses/tresorseen/service/FileStorageService.class
