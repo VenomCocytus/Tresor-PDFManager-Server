@@ -155,7 +155,7 @@ public class FileController {
         return ResponseEntity.status(HttpStatus.OK).body(files);
     }
 
-    @GetMapping("/files/get/{fileName}")
+    @PostMapping("/files/download/{fileName}")
     public ResponseEntity<byte[]> downloadFileByName(@PathVariable String fileName){
         try{
             FileDB fileDB = storageService.getFileByName(fileName);
