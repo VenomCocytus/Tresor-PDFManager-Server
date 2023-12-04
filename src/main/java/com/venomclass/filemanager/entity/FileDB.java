@@ -9,7 +9,6 @@ import java.sql.Timestamp;
 
 @Entity
 @Data
-@Table(name = "Files")
 @AllArgsConstructor
 @NoArgsConstructor
 public class FileDB {

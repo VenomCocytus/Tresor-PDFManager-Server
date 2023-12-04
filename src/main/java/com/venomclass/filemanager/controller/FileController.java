@@ -61,7 +61,7 @@ public class FileController {
                     storageService.uploadFile(file);
                     uploadedFileNames.add(file.getOriginalFilename());
                 } catch (Exception e){
-                        existingFileNames.add(file.getOriginalFilename());
+                    existingFileNames.add(file.getOriginalFilename());
                 }
             }
 
@@ -155,7 +155,7 @@ public class FileController {
         return ResponseEntity.status(HttpStatus.OK).body(files);
     }
 
-    @GetMapping("/files/get/{fileName}")
+    @PostMapping("/files/download/{fileName}")
     public ResponseEntity<byte[]> downloadFileByName(@PathVariable String fileName){
         try{
             FileDB fileDB = storageService.getFileByName(fileName);
@@ -199,6 +199,16 @@ public class FileController {
         }
     }
 
+    @PutMapping("/files/{filename}/update")
+    public ResponseEntity<String> updateFileInfoByName(@PathVariable String filename, @RequestParam String newFileName, @RequestParam Boolean state) {
+        try {
+            FileDB updatedFile = storageService.updateFileInfo(filename, newFileName, state);
+            return ResponseEntity.status(HttpStatus.OK).body("The file, " + filename + " have been update successfully");
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Error updating file information: " + e.getMessage());
+        }
+    }
+
     @DeleteMapping("/files/{filename}/delete")
     public ResponseEntity<String> deleteFileByName(@PathVariable String filename) {
         try {
@@ -229,3 +239,4 @@ public class FileController {
         return ResponseEntity.status(HttpStatus.OK).body(files);
     }
 }
+

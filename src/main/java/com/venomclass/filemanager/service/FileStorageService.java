@@ -108,4 +108,22 @@ public class FileStorageService {
             throw new Exception("File not found with filename: " + filename);
         }
     }
+
+    public FileDB updateFileInfo(String filename, String newFileName, Boolean state) throws Exception {
+        Optional<FileDB> fileOptional = repo.findByFileName(filename);
+        if (fileOptional.isPresent()) {
+            FileDB file = fileOptional.get();
+
+            if (newFileName.contains("..")) {
+                throw new Exception("New filename contains invalid path sequence: " + newFileName);
+            }
+
+            file.setFileName(newFileName);
+            file.setIsArchived(state);
+
+            return repo.save(file);
+        } else {
+            throw new Exception("File not found with filename: " + filename);
+        }
+    }
 }
